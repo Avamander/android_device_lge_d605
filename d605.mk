@@ -41,6 +41,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/scripts/init.engdo.post_boot.sh:system/etc/init.engdo.post_boot.sh \
 	$(LOCAL_PATH)/scripts/init.engdo.sdio.sh:system/etc/init.engdo.sdio.sh \
 	$(LOCAL_PATH)/scripts/init.engdo.wifi.sh:system/etc/init.engdo.wifi.sh \
+	$(LOCAL_PATH)/scripts/99kmsg:system/etc/init.d/99kmsg \
 	$(LOCAL_PATH)/scripts/init.varcain.nfc_fixup.sh:system/etc/init.varcain.nfc_fixup.sh
 
 PRODUCT_COPY_FILES += \
@@ -56,7 +57,13 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/init.engdo.usb.rc:root/init.engdo.usb.rc \
 	$(LOCAL_PATH)/init.engdo.usb.sh:root/init.engdo.usb.sh \
 	$(LOCAL_PATH)/healthd:root/sbin/healthd \
-	$(LOCAL_PATH)/chargerlogo:root/sbin/chargerlogo 
+	$(LOCAL_PATH)/zRamSettings.apk:system/app/zRamSettings.apk \
+	$(LOCAL_PATH)/zram_stats:system/bin/zram_stats \
+	$(LOCAL_PATH)/KitKatWhite.apk:system/app/KitKatWhite.apk \
+	$(LOCAL_PATH)/mGerrit.apk:system/app/mGerrit.apk
+
+#	$(LOCAL_PATH)/charger:root/charger \
+	$(LOCAL_PATH)/chargerlogo:root/sbin/chargerlogo \
 
 
 # Configs
