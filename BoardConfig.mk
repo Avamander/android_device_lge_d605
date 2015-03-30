@@ -1,4 +1,3 @@
-USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
 -include vendor/lge/d605/BoardConfigVendor.mk
@@ -26,7 +25,7 @@ TARGET_BOARD_PLATFORM := msm8960
 TARGET_BOOTLOADER_BOARD_NAME := d605
 TARGET_NO_BOOTLOADER := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=d605 user_debug=31 msm_rtb msm_rtb.filter=0x3F vmalloc=268M ehci-hcd.park=3 maxcpus=2
+BOARD_KERNEL_CMDLINE := androidboot.hardware=d605 user_debug=31 msm_rtb msm_rtb.filter=0x3F vmalloc=271M ehci-hcd.park=3 maxcpus=2
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -64,7 +63,7 @@ WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_P2P := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
 WIFI_DRIVER_FW_PATH_AP := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
 
-TARGET_NO_RADIOIMAGE := true
+#TARGET_NO_RADIOIMAGE := true
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -104,7 +103,7 @@ TARGET_USES_SF_BYPASS := true
 TARGET_USES_C2D_COMPOSITION := true
 #TARGET_FORCE_CPU_UPLOAD := true
 
-#DEVICE_RESOLUTION := 720x1280
+DEVICE_RESOLUTION := 720x1280
 
 USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_QCOM_DISPLAY_VARIANT := caf
@@ -116,12 +115,3 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 
 BOARD_NEEDS_MEMORYHEAPPMEM := false
 ENABLE_WEBGL := true
-
-CONFIG_USB_OTG := true
-CONFIG_USB_MSM_OTG := true
-
-CONFIG_CGROUP_MEM_RES_CTLR := true
-CONFIG_CGROUP_MEM_RES_CTLR_SWAP := true
-CONFIG_ZRAM := true
-CONDIF_XVMALLOC := true
-ZRAM_FOR_ANDROID := true

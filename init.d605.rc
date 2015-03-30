@@ -864,10 +864,7 @@ service healthd-charger /sbin/healthd -n
     critical
     seclabel u:r:healthd:s0
 
-service charger /charger
-    class charger
-
-on chargerlogo_adbd
+on chargerlogo
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
     write /sys/class/android_usb/android0/idProduct 61FA
@@ -880,9 +877,10 @@ on chargerlogo_adbd
     write /sys/class/android_usb/android0/iSerial $ro.serialno
     write /sys/class/android_usb/android0/enable 1
     start adbd
-    start charger
+    exec /charger
 
-on chargerlogo
+
+on charger
     stop bootlogo
     write /sys/module/rpm_resources/enable_low_power/L2_cache 1
     write /sys/module/rpm_resources/enable_low_power/pxo 1
@@ -891,8 +889,7 @@ on chargerlogo
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
-    start charger
-    exec /sbin/chargerlogo
+    exec /charger
 
 service time_daemon /system/bin/time_daemon
    class late_start
@@ -925,10 +922,6 @@ on property:sys.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
 
 service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
-    class late_start
-    disabled
-
-service fuse_usbdisk0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk0 /storage/usbdisk0
     class late_start
     disabled
 

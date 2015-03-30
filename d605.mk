@@ -1,9 +1,11 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
+$(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 $(call inherit-product-if-exists, vendor/lge/d605/d605-vendor.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/d605/overlay
 
@@ -41,8 +43,11 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/scripts/init.engdo.post_boot.sh:system/etc/init.engdo.post_boot.sh \
 	$(LOCAL_PATH)/scripts/init.engdo.sdio.sh:system/etc/init.engdo.sdio.sh \
 	$(LOCAL_PATH)/scripts/init.engdo.wifi.sh:system/etc/init.engdo.wifi.sh \
-	$(LOCAL_PATH)/scripts/99kmsg:system/etc/init.d/99kmsg \
-	$(LOCAL_PATH)/scripts/init.varcain.nfc_fixup.sh:system/etc/init.varcain.nfc_fixup.sh
+	$(LOCAL_PATH)/scripts/init.varcain.nfc_fixup.sh:system/etc/init.varcain.nfc_fixup.sh \
+	$(LOCAL_PATH)/zRamSettings.apk:system/app/zRamSettings.apk \
+	$(LOCAL_PATH)/zram_stats:system/bin/zram_stats \
+	$(LOCAL_PATH)/KitKatWhite.apk:system/app/KitKatWhite.apk \
+	$(LOCAL_PATH)/mGerrit.apk:system/app/mGerrit.apk
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/init.d605.rc:root/init.d605.rc \
@@ -57,18 +62,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/init.engdo.usb.rc:root/init.engdo.usb.rc \
 	$(LOCAL_PATH)/init.engdo.usb.sh:root/init.engdo.usb.sh \
 	$(LOCAL_PATH)/healthd:root/sbin/healthd \
-	$(LOCAL_PATH)/zRamSettings.apk:system/app/zRamSettings.apk \
-	$(LOCAL_PATH)/zram_stats:system/bin/zram_stats \
-	$(LOCAL_PATH)/KitKatWhite.apk:system/app/KitKatWhite.apk \
-	$(LOCAL_PATH)/mGerrit.apk:system/app/mGerrit.apk
-
-#	$(LOCAL_PATH)/charger:root/charger \
-	$(LOCAL_PATH)/chargerlogo:root/sbin/chargerlogo \
-
 
 # Configs
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/config/vold.fstab:system/etc/vold.fstab \
 	$(LOCAL_PATH)/config/gpio-keys.kcm:system/usr/keychars/gpio-keys.kcm \
 	$(LOCAL_PATH)/config/max1187x_touchscreen_0.kcm:system/usr/keychars/max1187x_touchscreen_0.kcm \
 	$(LOCAL_PATH)/config/pmic8xxx_pwrkey.kcm:system/usr/keychars/pmic8xxx_pwrkey.kcm \
@@ -96,6 +92,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+	frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
 	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
@@ -144,10 +141,35 @@ PRODUCT_PACKAGES += \
 	Tag \
 	com.android.nfc_extras \
 	libqcomvoiceprocessing \
-	Torch \
+	camera.msm8960 \
+	libmmcamera_interface2 \
+	libmmcamera_interface \
+	libloc_adapter \
+	libloc_eng \
+	libloc_api_v02 \
+	libloc_ds_api \
+	libloc_core \
+	libizat_core \
+	libgeofence \
+	libgps.utils \
+	gps.msm8960 \
+	flp.msm8960 \
+	bdAddrLoader \
+	libwfcu \
+	conn_init \
+	CMFileManager \
+	OmniSwitch\
+	PerformanceControl 
+
+
+PRODUCT_PACKAGES += \
 	charger \
 	charger_res_images
+
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	telephony.lteOnCdmaDevice=0
